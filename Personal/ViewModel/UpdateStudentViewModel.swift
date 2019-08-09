@@ -10,15 +10,8 @@ import Foundation
 
 class UpdateStudentViewModel: StudentViewModel {
     
-    private static let hourFormatter: DateFormatter = {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "HH:mm"
-        return formatter
-    }()
-    
-    private var student: Student!
-    
-    var updatedStudent: (Student) -> () = { _ in }
+    var updatedStudent: ((Student?) -> Void) = { _ in  }
+    var goBack: (() -> Void)? = {  }
     
     var title: String {
         return Localizable.string(forKey: "title_list")
@@ -57,6 +50,16 @@ class UpdateStudentViewModel: StudentViewModel {
 
     var hideContainerHour: Dynamic<Bool> = Dynamic(true)
     
+    private static let hourFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "HH:mm"
+        return formatter
+    }()
+    
+    private var student: Student!
+    
+    
+    // MARK: Methods
     func submitStudent() {
         guard let firstname = self.firstname,
             let lastname = self.lastname,
@@ -65,6 +68,11 @@ class UpdateStudentViewModel: StudentViewModel {
         }
         
         Database.updateStudent(id: self.student.id, firstname: firstname, lastname: lastname, hour: self.hour.value, days: days)
+        self.updatedStudent(self.student)
+    }
+    
+    func desactiveStudent() {
+        Database.desactiveStudent(id: self.student.id)
         self.updatedStudent(self.student)
     }
     

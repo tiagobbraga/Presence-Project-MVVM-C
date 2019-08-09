@@ -10,15 +10,7 @@ import Foundation
 
 class PresenceListViewModel {
     
-    internal var student: Student! {
-        didSet {
-            self.titlePage.value = self.student.first_name + " " + self.student.last_name
-        }
-    }
-    private var group: [[Presence]] = []
-    
     var reloadTableViewClosure: () -> () = {  }
-//    var didTapBack: () -> () = {  }
     var didTappedEditStudent: (StudentViewModel) -> () = { _ in }
     
     var textEditUser: String = Localizable.string(forKey: "btn_add_edit_user")
@@ -30,12 +22,22 @@ class PresenceListViewModel {
         }
     }
     
+    var goBack: (() -> Void) = { }
+    
+    internal var student: Student! {
+        didSet {
+            self.titlePage.value = self.student.first_name + " " + self.student.last_name
+        }
+    }
+    
+    private var group: [[Presence]] = []
+    
     init(student: Student) {
         self.student = student
         self.titlePage.value = self.student.first_name + " " + self.student.last_name
     }
     
-    // MARK: Public Methods
+    // MARK: Methods
     func filterData() {
         self.group = []
 
@@ -59,10 +61,6 @@ class PresenceListViewModel {
             }
         }
         self.group.append(newGroup)
-
-//        print(presences)
-//        print("####")
-//        print(self.group)
 
         self.reloadTableViewClosure()
     }

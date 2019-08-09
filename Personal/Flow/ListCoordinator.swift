@@ -45,7 +45,7 @@ class ListCoordinator: BaseCoordinator {
         }
     }
     
-    private func newEditUser(viewModel: StudentViewModel?, navigationController: UINavigationController) {
+    private func newEditUser(viewModel: StudentViewModel, navigationController: UINavigationController) {
         let newEditUserCoordinator: NewEditUserCoordinator = NewEditUserCoordinator(viewModel: viewModel, navigationController: navigationController)
         self.store(coordinator: newEditUserCoordinator)
         newEditUserCoordinator.start()

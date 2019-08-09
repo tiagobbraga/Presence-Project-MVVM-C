@@ -10,11 +10,8 @@ import Foundation
 
 class AddStudentViewModel: StudentViewModel {
     
-    private static let hourFormatter: DateFormatter = {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "HH:mm"
-        return formatter
-    }()
+    var updatedStudent: (Student?) -> () = { _ in }
+    var goBack: (() -> Void)? = {  }
     
     var title: String {
         return Localizable.string(forKey: "title_list")
@@ -53,6 +50,13 @@ class AddStudentViewModel: StudentViewModel {
     
     var validInputData: Dynamic<Bool> = Dynamic(false)
     
+    private static let hourFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "HH:mm"
+        return formatter
+    }()
+    
+    // MARK: Methods
     func submitStudent() {
         guard let firstname = self.firstname,
             let lastname = self.lastname,
@@ -62,7 +66,10 @@ class AddStudentViewModel: StudentViewModel {
         }
         
         Database.newStudent(firstname: firstname, lastname: lastname, hour: self.hour.value, days: days)
+        self.goBack?()
     }
+    
+    func desactiveStudent() {}
     
     private func validateInput() {
         self.validInputData.value = false
@@ -73,8 +80,6 @@ class AddStudentViewModel: StudentViewModel {
             self.hour.value.count > 0 {
             self.validInputData.value = true
         }
-        
-//        print("validInputData.value \(validInputData.value)")
     }
 
 }

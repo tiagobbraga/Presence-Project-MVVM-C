@@ -13,7 +13,7 @@ class NewEditUserCoordinator: BaseCoordinator {
     var navigationController: UINavigationController
     var viewModel: StudentViewModel?
     
-    init(viewModel: StudentViewModel?, navigationController: UINavigationController?) {
+    init(viewModel: StudentViewModel?, navigationController: UINavigationController) {
         self.viewModel = viewModel
         self.navigationController = navigationController
     }
@@ -22,12 +22,8 @@ class NewEditUserCoordinator: BaseCoordinator {
         let newEdituserViewController = NewEditUserViewController.instantiate() 
         newEdituserViewController.setup(viewModel: self.viewModel!)
         
-        newEdituserViewController.updateStudents = { [weak self] in
-            self?.navigationController?.popViewController(animated: true)
-            self?.isCompleted?()
-        }
-        newEdituserViewController.goBack = { [weak self] in
-            self?.navigationController?.popViewController(animated: true)
+        self.viewModel?.goBack = { [weak self] in
+            self?.navigationController.popViewController(animated: true)
             self?.isCompleted?()
         }
         

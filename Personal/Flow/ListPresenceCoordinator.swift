@@ -24,10 +24,11 @@ class ListPresenceCoordinator: BaseCoordinator {
         let listPresenceViewController = ListPresenceViewController.instantiate()
         listPresenceViewController.setup(viewModel: self.presenceListViewModel!)
         
-        listPresenceViewController.goBack = { [weak self] in
+        self.presenceListViewModel?.goBack = { [weak self] in
             self?.navigationController.popViewController(animated: true)
             self?.isCompleted?()
         }
+        
         self.presenceListViewModel?.didTappedEditStudent = { [weak self] viewModel in
             guard let strongSelf = self else { return }
             strongSelf.newEditUser(viewModel: viewModel, navigationController: strongSelf.navigationController)
@@ -36,8 +37,8 @@ class ListPresenceCoordinator: BaseCoordinator {
         self.navigationController.pushViewController(listPresenceViewController, animated: true)
     }
     
-    private func newEditUser(viewModel: StudentViewModel?, navigationController: UINavigationController?) {
-        let newEditUserCoordinator: NewEditUserCoordinator = NewEditUserCoordinator(viewModel: viewModel, navigationController: navigationController)
+    private func newEditUser(viewModel: StudentViewModel, navigationController: UINavigationController) {
+        let newEditUserCoordinator: NewEditUserCoordinator = NewEditUserCoordinator(viewModel: viewModel, navigationController: navigationController)        
         self.store(coordinator: newEditUserCoordinator)
         newEditUserCoordinator.start()
         newEditUserCoordinator.isCompleted = { [weak self] in

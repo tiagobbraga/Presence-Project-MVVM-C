@@ -14,7 +14,6 @@ class ListPresenceViewController: UIViewController, Storyboarded {
     
     private var viewModel: PresenceListViewModel!
     private var updateStudentViewModel: UpdateStudentViewModel?
-    var goBack: (() -> Void)?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,12 +51,13 @@ class ListPresenceViewController: UIViewController, Storyboarded {
         self.updateStudentViewModel = UpdateStudentViewModel(student: self.viewModel.student)
         self.updateStudentViewModel?.updatedStudent = { [weak self] student in
             self?.viewModel.student = student
+            self?.viewModel.goBack()
         }
         self.viewModel.didTappedEditStudent(self.updateStudentViewModel!)
     }
     
     @objc private func onBackNavigate() {
-        self.goBack?()
+        self.viewModel.goBack()
     }
 
 }

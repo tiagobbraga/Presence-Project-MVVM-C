@@ -9,11 +9,8 @@
 import UIKit
 import MultiSelectSegmentedControl
 
-//import RealmSwift
-
-class NewEditUserViewController: UIViewController, Storyboarded, CoordinatorReference {
-    var coordinator: Coordinator?
-
+class NewEditUserViewController: UIViewController, Storyboarded {
+    
     @IBOutlet weak var firstNameTextField: UITextField! {
         didSet {
             firstNameTextField.addTarget(self, action: #selector(onFirstnameDidChange), for: .editingChanged)
@@ -38,8 +35,6 @@ class NewEditUserViewController: UIViewController, Storyboarded, CoordinatorRefe
     
     private var selectedTextField: UITextField? = nil
     private var viewModel: StudentViewModel?
-    var updateStudents: (() -> Void)?
-    var goBack: (() -> Void)?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -88,19 +83,10 @@ class NewEditUserViewController: UIViewController, Storyboarded, CoordinatorRefe
 
     @IBAction func onAdd(_ sender: Any) {
         self.viewModel?.submitStudent()
-        self.updateStudents?()
     }
     
     @IBAction func onDesactiveStudent(_ sender: Any) {
-//        let realm = try! Realm()
-//
-//        try! realm.write {
-//            if let student = self.student {
-//                student.active = false
-//            }
-//        }
-//
-//        self.navigationController?.popViewController(animated: true)
+        self.viewModel?.desactiveStudent()
     }
     
     @IBAction func onCancelSetHour(_ sender: Any) {
@@ -117,7 +103,7 @@ class NewEditUserViewController: UIViewController, Storyboarded, CoordinatorRefe
     }
     
     @objc private func onBackNavigate() {
-        self.goBack?()
+        self.viewModel?.goBack?()
     }
     
 }

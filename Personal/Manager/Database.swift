@@ -69,14 +69,13 @@ class Database {
         }
     }
     
-    static func desactiveStudent(id: Int) {
-//        let realm = try! Realm()
-//
-//        try! realm.write {
-//            if let student = self.student {
-//                student.active = false
-//            }
-//        }
+    static func desactiveStudent(id: String) {
+        let realm = try! Realm()
+        if let student: Student = realm.object(ofType: Student.self, forPrimaryKey: id) {            
+            try! realm.write {
+                student.active = false
+            }
+        }
     }
 
 }

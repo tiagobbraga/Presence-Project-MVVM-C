@@ -16,7 +16,7 @@ class StudentListViewModel {
     var didTapBack: () -> () = {  }
     
     var hasContent: Dynamic<Bool> = Dynamic(false)
-    var textNoDataWarning: String = "Nenhum aluno adicionado"
+    var textNoDataWarning: String = "Nenhum aluno adicionado ou ativo"
     var textNewUser: String = Localizable.string(forKey: "btn_add_new_user")
     var titlePage: String = Localizable.string(forKey: "title_list")
     
@@ -33,8 +33,9 @@ class StudentListViewModel {
         }
     }
     
+    // MARK: Methods
     func fecthData() {
-        self.cellStudentViewModels = Database.allStudents().map { StudentCellViewModel(student: $0) }
+        self.cellStudentViewModels = Database.allStudentsActive().map { StudentCellViewModel(student: $0) }
     }
     
     func getCellViewModel(row: Int) -> StudentCellViewModel {
