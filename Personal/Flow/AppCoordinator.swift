@@ -21,18 +21,25 @@ class AppCoordinator : BaseCoordinator {
     override func start() {
         // preparing root view
         let navigationController = UINavigationController()
-        let listCoordinator = ListCoordinator(navigationController: navigationController)
+        let router = Router(navigationController: navigationController)
+//        let listCoordinator = ListCoordinator(navigationController: navigationController)
+        let listCoordinator = ListCoordinator(router: router)
         
         // store child coordinator
         self.store(coordinator: listCoordinator)
         listCoordinator.start()
         
+        router.push(listCoordinator, isAnimated: true) { [weak self, weak listCoordinator] in
+            guard let strongSelf = self, let listCoordinator = listCoordinator else { return }
+            strongSelf.free(coordinator: listCoordinator)
+        }
+        
         window.rootViewController = navigationController
         window.makeKeyAndVisible()
         
         // detect when free it
-        listCoordinator.isCompleted = { [weak self] in
-            self?.free(coordinator: listCoordinator)
-        }
+//        listCoordinator.isCompleted = { [weak self] in
+//            self?.free(coordinator: listCoordinator)
+//        }
     }
 }

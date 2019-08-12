@@ -14,7 +14,7 @@ class ListViewController: UIViewController, Storyboarded {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var infoUsersLabel: UILabel!
     
-    private var viewModel: StudentListViewModel!
+    internal var viewModel: StudentListViewModel!
 
     override func viewDidLoad() {
         super.viewDidLoad()

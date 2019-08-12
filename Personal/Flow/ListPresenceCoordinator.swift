@@ -11,39 +11,42 @@ import UIKit
 
 class ListPresenceCoordinator: BaseCoordinator {
     
-    var navigationController: UINavigationController
+//    var navigationController: UINavigationController
     
-    private var presenceListViewModel: PresenceListViewModel?
+    lazy var controller: ListPresenceViewController = {
+        let listPresenceViewController = ListPresenceViewController.instantiate()
+        listPresenceViewController.viewModel = self.presenceListViewModel
+        return listPresenceViewController
+    }()
     
-    init(viewModel: PresenceListViewModel?, navigationController: UINavigationController) {
+    private var presenceListViewModel: PresenceListViewModel
+    
+    let router: RouterProtocol
+    
+    init(viewModel: PresenceListViewModel, router: RouterProtocol) {
         self.presenceListViewModel = viewModel
-        self.navigationController = navigationController
+        self.router = router
     }
     
     override func start() {
-        let listPresenceViewController = ListPresenceViewController.instantiate()
-        listPresenceViewController.setup(viewModel: self.presenceListViewModel!)
-        
-        self.presenceListViewModel?.goBack = { [weak self] in
-            self?.navigationController.popViewController(animated: true)
-            self?.isCompleted?()
-        }
-        
-        self.presenceListViewModel?.didTappedEditStudent = { [weak self] viewModel in
+        self.presenceListViewModel.didTappedEditStudent = { [weak self] viewModel in
             guard let strongSelf = self else { return }
-            strongSelf.newEditUser(viewModel: viewModel, navigationController: strongSelf.navigationController)
+            strongSelf.newEditUser(viewModel: viewModel)
         }
-        
-        self.navigationController.pushViewController(listPresenceViewController, animated: true)
     }
     
-    private func newEditUser(viewModel: StudentViewModel, navigationController: UINavigationController) {
-        let newEditUserCoordinator: NewEditUserCoordinator = NewEditUserCoordinator(viewModel: viewModel, navigationController: navigationController)        
+    private func newEditUser(viewModel: StudentViewModel) {
+        let newEditUserCoordinator: NewEditUserCoordinator = NewEditUserCoordinator(viewModel: viewModel, router: self.router)
         self.store(coordinator: newEditUserCoordinator)
         newEditUserCoordinator.start()
-        newEditUserCoordinator.isCompleted = { [weak self] in
-            self?.free(coordinator: newEditUserCoordinator)
+        self.router.push(newEditUserCoordinator, isAnimated: true) { [weak self, weak newEditUserCoordinator] in
+            guard let strongSelf = self, let newEditUserCoordinator = newEditUserCoordinator else { return }
+            strongSelf.free(coordinator: newEditUserCoordinator)
         }
     }
     
+}
+
+extension ListPresenceCoordinator: Drawable {
+    var viewController: UIViewController? { return controller }
 }

@@ -27,6 +27,7 @@
 		B16351B422EFCBE1009F3B56 /* ListCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B16351B322EFCBE1009F3B56 /* ListCoordinator.swift */; };
 		B163EE7321A614F600BC64F9 /* NewEditUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B163EE7221A614F600BC64F9 /* NewEditUserViewController.swift */; };
 		B175966B22FCC30200FE319D /* Storyboarded.swift in Sources */ = {isa = PBXBuildFile; fileRef = B175966A22FCC30200FE319D /* Storyboarded.swift */; };
+		B17596712301F9B200FE319D /* Drawable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B17596702301F9B200FE319D /* Drawable.swift */; };
 		B178D91622FB088F0047AE83 /* StudentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B178D91522FB088F0047AE83 /* StudentViewModel.swift */; };
 		B178D91822FB0A1D0047AE83 /* AddStudentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B178D91722FB0A1D0047AE83 /* AddStudentViewModel.swift */; };
 		B178D91A22FB138B0047AE83 /* NewEditUserCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B178D91922FB138B0047AE83 /* NewEditUserCoordinator.swift */; };
@@ -62,6 +63,8 @@
 		B16351B322EFCBE1009F3B56 /* ListCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCoordinator.swift; sourceTree = "<group>"; };
 		B163EE7221A614F600BC64F9 /* NewEditUserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewEditUserViewController.swift; sourceTree = "<group>"; };
 		B175966A22FCC30200FE319D /* Storyboarded.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storyboarded.swift; sourceTree = "<group>"; };
+		B175966C2301D04000FE319D /* Personal.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Personal.entitlements; sourceTree = "<group>"; };
+		B17596702301F9B200FE319D /* Drawable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Drawable.swift; sourceTree = "<group>"; };
 		B178D91522FB088F0047AE83 /* StudentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentViewModel.swift; sourceTree = "<group>"; };
 		B178D91722FB0A1D0047AE83 /* AddStudentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddStudentViewModel.swift; sourceTree = "<group>"; };
 		B178D91922FB138B0047AE83 /* NewEditUserCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewEditUserCoordinator.swift; sourceTree = "<group>"; };
@@ -152,6 +155,7 @@
 		B16351B022EFCB1E009F3B56 /* Flow */ = {
 			isa = PBXGroup;
 			children = (
+				B175966F2301F9A200FE319D /* Router */,
 				B16351B122EFCB4C009F3B56 /* AppCoordinator.swift */,
 				B16351B322EFCBE1009F3B56 /* ListCoordinator.swift */,
 				B106728F22F0A84400CAEC95 /* ListPresenceCoordinator.swift */,
@@ -188,6 +192,14 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		B175966F2301F9A200FE319D /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				B17596702301F9B200FE319D /* Drawable.swift */,
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
 		B19BF87B22EF7C3C00388E8C /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
@@ -222,6 +234,7 @@
 		B1C3BF7B21A612510077C30A /* Personal */ = {
 			isa = PBXGroup;
 			children = (
+				B175966C2301D04000FE319D /* Personal.entitlements */,
 				B106729522F0D88800CAEC95 /* Extensions */,
 				B16351B022EFCB1E009F3B56 /* Flow */,
 				B16351AB22EFCADE009F3B56 /* Coordinator */,
@@ -275,6 +288,14 @@
 				TargetAttributes = {
 					B1C3BF7821A612510077C30A = {
 						CreatedOnToolsVersion = 10.1;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 0;
+							};
+							com.apple.iCloud = {
+								enabled = 0;
+							};
+						};
 					};
 				};
 			};
@@ -401,6 +422,7 @@
 				B178D91A22FB138B0047AE83 /* NewEditUserCoordinator.swift in Sources */,
 				B139447F21A64EDB00370D7C /* ListPresenceViewController.swift in Sources */,
 				B106729422F0D87D00CAEC95 /* Date+Utils.swift in Sources */,
+				B17596712301F9B200FE319D /* Drawable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

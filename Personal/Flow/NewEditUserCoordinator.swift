@@ -10,24 +10,29 @@ import UIKit
 
 class NewEditUserCoordinator: BaseCoordinator {
     
-    var navigationController: UINavigationController
-    var viewModel: StudentViewModel?
+    var viewModel: StudentViewModel
+    let router: RouterProtocol
     
-    init(viewModel: StudentViewModel?, navigationController: UINavigationController) {
+    lazy var controller: NewEditUserViewController = {
+        let newEdituserViewController = NewEditUserViewController.instantiate()
+        newEdituserViewController.viewModel = self.viewModel
+        return newEdituserViewController
+    }()
+    
+    init(viewModel: StudentViewModel, router: RouterProtocol) {
         self.viewModel = viewModel
-        self.navigationController = navigationController
+        self.router = router
     }
     
     override func start() {
         let newEdituserViewController = NewEditUserViewController.instantiate() 
-        newEdituserViewController.setup(viewModel: self.viewModel!)
-        
-        self.viewModel?.goBack = { [weak self] in
-            self?.navigationController.popViewController(animated: true)
-            self?.isCompleted?()
-        }
-        
-        self.navigationController.pushViewController(newEdituserViewController, animated: true)
+        newEdituserViewController.setup(viewModel: self.viewModel)
     }
 
+}
+
+extension NewEditUserCoordinator: Drawable {
+    
+    var viewController: UIViewController? { return controller }
+    
 }

@@ -34,13 +34,13 @@ class NewEditUserViewController: UIViewController, Storyboarded {
     @IBOutlet weak var desactiveButton: UIButton!
     
     private var selectedTextField: UITextField? = nil
-    private var viewModel: StudentViewModel?
+    internal var viewModel: StudentViewModel?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let backButton = UIBarButtonItem(title: "Back", style: .plain, target: self, action: #selector(onBackNavigate))
-        self.navigationItem.leftBarButtonItem = backButton
+//        let backButton = UIBarButtonItem(title: "Back", style: .plain, target: self, action: #selector(onBackNavigate))
+//        self.navigationItem.leftBarButtonItem = backButton
         
         self.bindVM()
     }
@@ -102,9 +102,9 @@ class NewEditUserViewController: UIViewController, Storyboarded {
         self.viewModel?.date = self.hourDatePicker.date
     }
     
-    @objc private func onBackNavigate() {
-        self.viewModel?.goBack?()
-    }
+//    @objc private func onBackNavigate() {
+//        self.viewModel?.goBack?()
+//    }
     
 }
 

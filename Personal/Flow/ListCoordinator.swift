@@ -11,47 +11,52 @@ import UIKit
 
 class ListCoordinator: BaseCoordinator {
     
-    var navigationController: UINavigationController
-    
-    init(navigationController: UINavigationController) {
-        self.navigationController = navigationController
+    let router: RouterProtocol
+    init(router: RouterProtocol) {
+        self.router = router
     }
+    
+    lazy var controller: ListViewController = {
+        let listViewController = ListViewController.instantiate()
+        let viewModel: StudentListViewModel = StudentListViewModel()
+        listViewController.viewModel = viewModel
+        return listViewController
+    }()
     
     override func start() {
-        let viewModel: StudentListViewModel = StudentListViewModel()
-        
-        let listViewController = ListViewController.instantiate()
-        listViewController.setup(viewModel: viewModel)
-        
-        viewModel.didTappedStudent = { [weak self] student in
+        self.controller.viewModel.didTappedStudent = { [weak self] student in
             guard let strongSelf = self else { return }
-            strongSelf.listPresence(viewModel: PresenceListViewModel(student: student), navigationController: strongSelf.navigationController)
+            strongSelf.listPresence(viewModel: PresenceListViewModel(student: student))
         }
         
-        viewModel.didTappedNewStudent = { [weak self] in
+        self.controller.viewModel.didTappedNewStudent = { [weak self] in
             guard let strongSelf = self else { return }
-            strongSelf.newEditUser(viewModel: AddStudentViewModel(), navigationController: strongSelf.navigationController)
+            strongSelf.newEditUser(viewModel: AddStudentViewModel())
         }
-        
-        self.navigationController.pushViewController(listViewController, animated: false)
     }
     
-    private func listPresence(viewModel: PresenceListViewModel, navigationController: UINavigationController) {
-        let listStudentCoordinator: ListPresenceCoordinator = ListPresenceCoordinator(viewModel: viewModel, navigationController: navigationController)
+    private func listPresence(viewModel: PresenceListViewModel) {
+        let listStudentCoordinator: ListPresenceCoordinator = ListPresenceCoordinator(viewModel: viewModel, router: self.router)
         self.store(coordinator: listStudentCoordinator)
         listStudentCoordinator.start()
-        listStudentCoordinator.isCompleted = { [weak self] in
-            self?.free(coordinator: listStudentCoordinator)
+        self.router.push(listStudentCoordinator, isAnimated: true) { [weak self, weak listStudentCoordinator] in
+            guard let strongSelf = self, let listStudentCoordinator = listStudentCoordinator else { return }
+            strongSelf.free(coordinator: listStudentCoordinator)
         }
     }
     
-    private func newEditUser(viewModel: StudentViewModel, navigationController: UINavigationController) {
-        let newEditUserCoordinator: NewEditUserCoordinator = NewEditUserCoordinator(viewModel: viewModel, navigationController: navigationController)
+    private func newEditUser(viewModel: StudentViewModel) {
+        let newEditUserCoordinator: NewEditUserCoordinator = NewEditUserCoordinator(viewModel: viewModel, router: self.router)
         self.store(coordinator: newEditUserCoordinator)
         newEditUserCoordinator.start()
-        newEditUserCoordinator.isCompleted = { [weak self] in
-            self?.free(coordinator: newEditUserCoordinator)
-        }        
+        self.router.push(newEditUserCoordinator, isAnimated: true) { [weak self, weak newEditUserCoordinator] in
+            guard let strongSelf = self, let newEditUserCoordinator = newEditUserCoordinator else { return }
+            strongSelf.free(coordinator: newEditUserCoordinator)
+        }
     }
     
+}
+
+extension ListCoordinator: Drawable {
+    var viewController: UIViewController? { return controller }
 }

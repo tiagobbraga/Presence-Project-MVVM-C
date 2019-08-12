@@ -12,14 +12,14 @@ class ListPresenceViewController: UIViewController, Storyboarded {
     
     @IBOutlet weak var tableView: UITableView!
     
-    private var viewModel: PresenceListViewModel!
+    internal var viewModel: PresenceListViewModel!
     private var updateStudentViewModel: UpdateStudentViewModel?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let backButton = UIBarButtonItem(title: "Back", style: .plain, target: self, action: #selector(onBackNavigate))
-        self.navigationItem.leftBarButtonItem = backButton
+//        let backButton = UIBarButtonItem(title: "Back", style: .plain, target: self, action: #selector(onBackNavigate))
+//        self.navigationItem.leftBarButtonItem = backButton
         
         self.bindVM()
     }
@@ -56,9 +56,9 @@ class ListPresenceViewController: UIViewController, Storyboarded {
         self.viewModel.didTappedEditStudent(self.updateStudentViewModel!)
     }
     
-    @objc private func onBackNavigate() {
-        self.viewModel.goBack()
-    }
+//    @objc private func onBackNavigate() {
+//        self.viewModel.goBack()
+//    }
 
 }
 
