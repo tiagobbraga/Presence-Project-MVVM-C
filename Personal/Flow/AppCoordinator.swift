@@ -22,7 +22,6 @@ class AppCoordinator : BaseCoordinator {
         // preparing root view
         let navigationController = UINavigationController()
         let router = Router(navigationController: navigationController)
-//        let listCoordinator = ListCoordinator(navigationController: navigationController)
         let listCoordinator = ListCoordinator(router: router)
         
         // store child coordinator
@@ -36,10 +35,5 @@ class AppCoordinator : BaseCoordinator {
         
         window.rootViewController = navigationController
         window.makeKeyAndVisible()
-        
-        // detect when free it
-//        listCoordinator.isCompleted = { [weak self] in
-//            self?.free(coordinator: listCoordinator)
-//        }
     }
 }

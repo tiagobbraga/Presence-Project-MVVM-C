@@ -77,7 +77,7 @@ extension ListPresenceViewController: UITableViewDataSource {
 
         let identifier = "Cell"
         let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath)
-        cell.textLabel?.text = presence.formatDate()
+        cell.textLabel?.text = presence.date.formatDate(format: "MMM d, yyyy - HH:mm")
 
         return cell
     }

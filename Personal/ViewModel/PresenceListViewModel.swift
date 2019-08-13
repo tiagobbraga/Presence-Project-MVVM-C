@@ -75,7 +75,7 @@ class PresenceListViewModel {
     
     func titleForSection(index: Int) -> String {
         guard let presence = self.group[index].first else { return "" }
-        return "\(presence.formatMonthYear())"
+        return "\(presence.date.formatDate(format: "MMMM yyyy"))"
     }
 
     

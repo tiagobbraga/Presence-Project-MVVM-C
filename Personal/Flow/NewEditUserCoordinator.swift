@@ -10,23 +10,29 @@ import UIKit
 
 class NewEditUserCoordinator: BaseCoordinator {
     
-    var viewModel: StudentViewModel
     let router: RouterProtocol
     
     lazy var controller: NewEditUserViewController = {
         let newEdituserViewController = NewEditUserViewController.instantiate()
-        newEdituserViewController.viewModel = self.viewModel
         return newEdituserViewController
     }()
     
     init(viewModel: StudentViewModel, router: RouterProtocol) {
-        self.viewModel = viewModel
         self.router = router
+        super.init()
+        self.controller.viewModel = viewModel
     }
     
     override func start() {
-        let newEdituserViewController = NewEditUserViewController.instantiate() 
-        newEdituserViewController.setup(viewModel: self.viewModel)
+        self.controller.viewModel?.goBack = { [weak self] in
+            guard let strongSelf = self else { return }
+            strongSelf.router.pop(true)
+        }
+        
+        self.controller.viewModel?.updatedStudent = { [weak self] student in
+            guard let strongSelf = self else { return }
+            strongSelf.router.popToRoot(true)
+        }
     }
 
 }

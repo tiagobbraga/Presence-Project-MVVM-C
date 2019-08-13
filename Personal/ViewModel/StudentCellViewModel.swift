@@ -18,7 +18,7 @@ class StudentCellViewModel {
     
     var detailLesson: String {
         guard let lesson = self.student.lesson else { return "" }
-        return "\(lesson.transcriptFormatDays()) às \(lesson.hour)"
+        return "\(lesson.weekDays) às \(lesson.hour)"
     }
     
     init(student: Student) {

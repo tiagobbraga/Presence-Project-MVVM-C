@@ -9,7 +9,7 @@
 "title_list" = "Alunos";
 "title_presence_list" = "Presença";
 "title_new_user" = "Novo Aluno";
-"title_new_user" = "Editar Aluno";
+"title_edit_user" = "Editar Aluno";
 
 "btn_add_new_user" = "Adicionar Aluno";
 "btn_add_edit_user" = "Editar Aluno";

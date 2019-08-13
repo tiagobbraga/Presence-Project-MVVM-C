@@ -18,6 +18,9 @@ class ListViewController: UIViewController, Storyboarded {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController?.navigationBar.prefersLargeTitles = true
+        self.navigationItem.largeTitleDisplayMode = .always
+        self.tableView.contentInsetAdjustmentBehavior = .never
         self.bindVM()
     }
     

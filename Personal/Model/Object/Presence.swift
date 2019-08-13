@@ -21,17 +21,3 @@ class Presence: Object {
         return "id"
     }
 }
-
-extension Presence {
-    func formatDate() -> String {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "MMM d, yyyy - HH:mm"
-        return formatter.string(from: self.date)
-    }
-    
-    func formatMonthYear() -> String {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "MMMM yyyy"
-        return formatter.string(from: self.date)
-    }
-}

@@ -28,9 +28,11 @@
 		B163EE7321A614F600BC64F9 /* NewEditUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B163EE7221A614F600BC64F9 /* NewEditUserViewController.swift */; };
 		B175966B22FCC30200FE319D /* Storyboarded.swift in Sources */ = {isa = PBXBuildFile; fileRef = B175966A22FCC30200FE319D /* Storyboarded.swift */; };
 		B17596712301F9B200FE319D /* Drawable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B17596702301F9B200FE319D /* Drawable.swift */; };
+		B1759673230241BF00FE319D /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1759672230241BF00FE319D /* Router.swift */; };
 		B178D91622FB088F0047AE83 /* StudentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B178D91522FB088F0047AE83 /* StudentViewModel.swift */; };
 		B178D91822FB0A1D0047AE83 /* AddStudentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B178D91722FB0A1D0047AE83 /* AddStudentViewModel.swift */; };
 		B178D91A22FB138B0047AE83 /* NewEditUserCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B178D91922FB138B0047AE83 /* NewEditUserCoordinator.swift */; };
+		B18671FD2302F64200D394A6 /* String+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = B18671FC2302F64200D394A6 /* String+Utils.swift */; };
 		B19BF88122EF854800388E8C /* StudentListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B19BF88022EF854800388E8C /* StudentListViewModel.swift */; };
 		B1AA945522FB5E3500861400 /* UpdateStudentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1AA945422FB5E3500861400 /* UpdateStudentViewModel.swift */; };
 		B1C3BF7D21A612510077C30A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C3BF7C21A612510077C30A /* AppDelegate.swift */; };
@@ -65,9 +67,11 @@
 		B175966A22FCC30200FE319D /* Storyboarded.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storyboarded.swift; sourceTree = "<group>"; };
 		B175966C2301D04000FE319D /* Personal.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Personal.entitlements; sourceTree = "<group>"; };
 		B17596702301F9B200FE319D /* Drawable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Drawable.swift; sourceTree = "<group>"; };
+		B1759672230241BF00FE319D /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		B178D91522FB088F0047AE83 /* StudentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentViewModel.swift; sourceTree = "<group>"; };
 		B178D91722FB0A1D0047AE83 /* AddStudentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddStudentViewModel.swift; sourceTree = "<group>"; };
 		B178D91922FB138B0047AE83 /* NewEditUserCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewEditUserCoordinator.swift; sourceTree = "<group>"; };
+		B18671FC2302F64200D394A6 /* String+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Utils.swift"; sourceTree = "<group>"; };
 		B19BF88022EF854800388E8C /* StudentListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentListViewModel.swift; sourceTree = "<group>"; };
 		B1AA945422FB5E3500861400 /* UpdateStudentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateStudentViewModel.swift; sourceTree = "<group>"; };
 		B1C3BF7921A612510077C30A /* Personal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Personal.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -113,6 +117,7 @@
 			children = (
 				B106729322F0D87D00CAEC95 /* Date+Utils.swift */,
 				B175966A22FCC30200FE319D /* Storyboarded.swift */,
+				B18671FC2302F64200D394A6 /* String+Utils.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -196,6 +201,7 @@
 			isa = PBXGroup;
 			children = (
 				B17596702301F9B200FE319D /* Drawable.swift */,
+				B1759672230241BF00FE319D /* Router.swift */,
 			);
 			path = Router;
 			sourceTree = "<group>";
@@ -401,6 +407,7 @@
 				B1C3BF7F21A612510077C30A /* ListViewController.swift in Sources */,
 				B175966B22FCC30200FE319D /* Storyboarded.swift in Sources */,
 				B163EE7321A614F600BC64F9 /* NewEditUserViewController.swift in Sources */,
+				B1759673230241BF00FE319D /* Router.swift in Sources */,
 				B106729222F0AFA100CAEC95 /* PresenceListViewModel.swift in Sources */,
 				B13C9A4222FA0EA000A19282 /* StudentCellViewModel.swift in Sources */,
 				B19BF88122EF854800388E8C /* StudentListViewModel.swift in Sources */,
@@ -408,6 +415,7 @@
 				B106729022F0A84400CAEC95 /* ListPresenceCoordinator.swift in Sources */,
 				B12244D921A616840029D379 /* Localizable.swift in Sources */,
 				B16351B422EFCBE1009F3B56 /* ListCoordinator.swift in Sources */,
+				B18671FD2302F64200D394A6 /* String+Utils.swift in Sources */,
 				B178D91822FB0A1D0047AE83 /* AddStudentViewModel.swift in Sources */,
 				B16351AD22EFCAF2009F3B56 /* Coordinator.swift in Sources */,
 				B142951221A6320200A5A2B4 /* Lesson.swift in Sources */,

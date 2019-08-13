@@ -14,7 +14,7 @@ class UpdateStudentViewModel: StudentViewModel {
     var goBack: (() -> Void)? = {  }
     
     var title: String {
-        return Localizable.string(forKey: "title_list")
+        return Localizable.string(forKey: "title_edit_user")
     }
     
     var firstname: String? {

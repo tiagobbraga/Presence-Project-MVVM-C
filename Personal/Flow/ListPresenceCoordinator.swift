@@ -11,25 +11,21 @@ import UIKit
 
 class ListPresenceCoordinator: BaseCoordinator {
     
-//    var navigationController: UINavigationController
-    
     lazy var controller: ListPresenceViewController = {
         let listPresenceViewController = ListPresenceViewController.instantiate()
-        listPresenceViewController.viewModel = self.presenceListViewModel
         return listPresenceViewController
     }()
-    
-    private var presenceListViewModel: PresenceListViewModel
     
     let router: RouterProtocol
     
     init(viewModel: PresenceListViewModel, router: RouterProtocol) {
-        self.presenceListViewModel = viewModel
         self.router = router
+        super.init()
+        self.controller.viewModel = viewModel
     }
     
     override func start() {
-        self.presenceListViewModel.didTappedEditStudent = { [weak self] viewModel in
+        self.controller.viewModel.didTappedEditStudent = { [weak self] viewModel in
             guard let strongSelf = self else { return }
             strongSelf.newEditUser(viewModel: viewModel)
         }

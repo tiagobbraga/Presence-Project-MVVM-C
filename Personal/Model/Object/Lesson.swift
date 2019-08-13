@@ -23,27 +23,14 @@ class Lesson: Object {
 
 extension Lesson {
     
-    func transcriptFormatDays() -> String {
-        var transcript: [String] = []
-        self.days.forEach { (day) in
-            switch day {
-            case 0:
-                transcript.append("Seg")
-            case 1:
-                transcript.append("Ter")
-            case 2:
-                transcript.append("Qua")
-            case 3:
-                transcript.append("Qui")
-            case 4:
-                transcript.append("Sex")
-            case 5:
-                transcript.append("Sáb")
-            default:
-                transcript.append("Dom")
-            }
+    var weekDays: String {
+        get {
+            var calendar = Calendar(identifier: .gregorian)
+            calendar.locale = Locale(identifier: "pt_BR")
+            let shortWeekday = calendar.shortWeekdaySymbols
+            let values = shortWeekday.filter { return Array(self.days).contains(shortWeekday.firstIndex(of: $0)!) }
+            return values.map{ return $0.capitalizingFirstLetter() }.joined(separator: ", ")
         }
-        return transcript.joined(separator: ", ")
     }
     
 }
