@@ -39,7 +39,8 @@ class UpdateStudentViewModel: StudentViewModel {
     
     var date: Date? {
         didSet {
-            hour.value = UpdateStudentViewModel.hourFormatter.string(from: date!)
+            guard let date = date else { return }
+            hour.value = date.formatDate(format: "HH:mm")
             validateInput()
         }
     }
@@ -50,14 +51,7 @@ class UpdateStudentViewModel: StudentViewModel {
 
     var hideContainerHour: Dynamic<Bool> = Dynamic(true)
     
-    private static let hourFormatter: DateFormatter = {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "HH:mm"
-        return formatter
-    }()
-    
     private var student: Student!
-    
     
     // MARK: Methods
     func submitStudent() {
@@ -99,8 +93,6 @@ class UpdateStudentViewModel: StudentViewModel {
             self.hour.value.count > 0 {
             self.validInputData.value = true
         }
-        
-//        print("validInputData.value \(validInputData.value)")
     }
     
 

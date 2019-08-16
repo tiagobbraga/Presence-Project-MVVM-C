@@ -11,7 +11,7 @@ import Foundation
 class PresenceListViewModel {
     
     var reloadTableViewClosure: () -> () = {  }
-    var didTappedEditStudent: (StudentViewModel) -> () = { _ in }
+    var didTappedEditStudent: (Student) -> () = { _ in }
     
     var textEditUser: String = Localizable.string(forKey: "btn_add_edit_user")
     var titlePage: Dynamic<String> = Dynamic("")

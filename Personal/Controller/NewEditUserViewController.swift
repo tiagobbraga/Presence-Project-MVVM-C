@@ -117,6 +117,7 @@ extension NewEditUserViewController: UITextFieldDelegate {
             self.selectedTextField?.resignFirstResponder()
             self.selectedTextField = textField
             self.viewModel?.hideContainerHour.value = false
+//            self.viewModel?.date = self.hourDatePicker.date
             return false
         }
         

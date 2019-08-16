@@ -17,10 +17,10 @@ class NewEditUserCoordinator: BaseCoordinator {
         return newEdituserViewController
     }()
     
-    init(viewModel: StudentViewModel, router: RouterProtocol) {
+    init(router: RouterProtocol, student: Student? = nil) {
         self.router = router
         super.init()
-        self.controller.viewModel = viewModel
+        self.controller.viewModel = student != nil ? UpdateStudentViewModel(student: student!) : AddStudentViewModel()
     }
     
     override func start() {

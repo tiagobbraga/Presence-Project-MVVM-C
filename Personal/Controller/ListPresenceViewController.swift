@@ -53,7 +53,7 @@ class ListPresenceViewController: UIViewController, Storyboarded {
             self?.viewModel.student = student
             self?.viewModel.goBack()
         }
-        self.viewModel.didTappedEditStudent(self.updateStudentViewModel!)
+        self.viewModel.didTappedEditStudent(self.viewModel.student)
     }
     
 //    @objc private func onBackNavigate() {

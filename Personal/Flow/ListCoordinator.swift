@@ -31,7 +31,7 @@ class ListCoordinator: BaseCoordinator {
         
         self.controller.viewModel.didTappedNewStudent = { [weak self] in
             guard let strongSelf = self else { return }
-            strongSelf.newEditUser(viewModel: AddStudentViewModel())
+            strongSelf.newEditUser()
         }
     }
     
@@ -45,8 +45,8 @@ class ListCoordinator: BaseCoordinator {
         }
     }
     
-    private func newEditUser(viewModel: StudentViewModel) {
-        let newEditUserCoordinator: NewEditUserCoordinator = NewEditUserCoordinator(viewModel: viewModel, router: self.router)
+    private func newEditUser() {
+        let newEditUserCoordinator: NewEditUserCoordinator = NewEditUserCoordinator(router: self.router)
         self.store(coordinator: newEditUserCoordinator)
         newEditUserCoordinator.start()
         self.router.push(newEditUserCoordinator, isAnimated: true) { [weak self, weak newEditUserCoordinator] in
