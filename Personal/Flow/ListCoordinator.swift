@@ -26,7 +26,7 @@ class ListCoordinator: BaseCoordinator {
     override func start() {
         self.controller.viewModel.didTappedStudent = { [weak self] student in
             guard let strongSelf = self else { return }
-            strongSelf.listPresence(viewModel: PresenceListViewModel(student: student))
+            strongSelf.listPresence(student: student)
         }
         
         self.controller.viewModel.didTappedNewStudent = { [weak self] in
@@ -35,8 +35,8 @@ class ListCoordinator: BaseCoordinator {
         }
     }
     
-    private func listPresence(viewModel: PresenceListViewModel) {
-        let listStudentCoordinator: ListPresenceCoordinator = ListPresenceCoordinator(viewModel: viewModel, router: self.router)
+    private func listPresence(student: Student) {
+        let listStudentCoordinator: ListPresenceCoordinator = ListPresenceCoordinator(router: self.router, student: student)
         self.store(coordinator: listStudentCoordinator)
         listStudentCoordinator.start()
         self.router.push(listStudentCoordinator, isAnimated: true) { [weak self, weak listStudentCoordinator] in

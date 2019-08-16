@@ -18,21 +18,21 @@ class ListPresenceCoordinator: BaseCoordinator {
     
     let router: RouterProtocol
     
-    init(viewModel: PresenceListViewModel, router: RouterProtocol) {
+    init(router: RouterProtocol, student: Student) {
         self.router = router
         super.init()
-        self.controller.viewModel = viewModel
+        self.controller.viewModel = PresenceListViewModel(student: student)
     }
     
     override func start() {
         self.controller.viewModel.didTappedEditStudent = { [weak self] model in
             guard let strongSelf = self else { return }
-            strongSelf.newEditUser(model: model)
+            strongSelf.newEditUser(student: model)
         }
     }
     
-    private func newEditUser(model: Student) {
-        let newEditUserCoordinator: NewEditUserCoordinator = NewEditUserCoordinator(router: self.router, student: model)
+    private func newEditUser(student: Student) {
+        let newEditUserCoordinator: NewEditUserCoordinator = NewEditUserCoordinator(router: self.router, student: student)
         self.store(coordinator: newEditUserCoordinator)
         newEditUserCoordinator.start()
         self.router.push(newEditUserCoordinator, isAnimated: true) { [weak self, weak newEditUserCoordinator] in
